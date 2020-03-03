@@ -47,27 +47,19 @@ public class Game {
      */
     public Statistics getStatistics() {
 
-        int total = 0;
-        int fewer = Integer.MAX_VALUE;
-        int most = 0;
+        float total = 0;
+        List<Integer> lstTotaux = new ArrayList<>();
 
         for (Player p : history.keySet())
         {
             int size = history.get(p).size();
             total += size;
-            if(fewer > size)
-            {
-                fewer = size;
-            }
-            if(most < size)
-            {
-                most = size;
-            }
+            lstTotaux.add(size);
         }
 
-        int average = total / history.size();
+        Collections.sort(lstTotaux);
 
-        return new Statistics(average, fewer, most, total);
+        return new Statistics(total / history.size(), lstTotaux.get(0), lstTotaux.get(lstTotaux.size() - 1), Math.round(total));
     }
 
     /**
