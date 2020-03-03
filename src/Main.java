@@ -17,7 +17,6 @@ public class Main {
     System.out.println(game.getHistory());
     System.out.println(game.getStatistics());
 
-
     System.out.println(game.getSpecificHistory(new Player(1)));
   }
 

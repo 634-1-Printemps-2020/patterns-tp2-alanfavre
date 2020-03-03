@@ -23,14 +23,21 @@ public class Game {
      * @param player le nouveau joueur
      */
     public void addPlayer(Player player) {
-      // TODO: Votre code ici
+      history.put(player, new ArrayList<CoinState>());
     }
 
     /**
      * Faire joueur tous les joueurs et stocker chaque partie dans history
      */
     public void play() {
-      // TODO: Votre code ici
+      for (Player p : history.keySet())
+      {
+          while (!Rules.getInstance().checkWin(history.get(p)))
+          {
+              p.play(Coin.getInstance());
+              history.get(p).add(Coin.getInstance().getState());
+          }
+      }
     }
 
     /**
@@ -39,8 +46,28 @@ public class Game {
      * @return Statistics
      */
     public Statistics getStatistics() {
-      // TODO: Votre code ici
-      return null;
+
+        int total = 0;
+        int fewer = Integer.MAX_VALUE;
+        int most = 0;
+
+        for (Player p : history.keySet())
+        {
+            int size = history.get(p).size();
+            total += size;
+            if(fewer > size)
+            {
+                fewer = size;
+            }
+            if(most < size)
+            {
+                most = size;
+            }
+        }
+
+        int average = total / history.size();
+
+        return new Statistics(average, fewer, most, total);
     }
 
     /**
@@ -49,8 +76,7 @@ public class Game {
      * @return Map contenant chaque joueur et la liste des ses lancers
      */
     public Map<Player, List<CoinState>> getHistory() {
-      // TODO: Votre code ici
-      return null;
+        return history;
     }
 
 
@@ -61,8 +87,7 @@ public class Game {
      * @return la liste des lancers d'un joueur
      */
     public List<CoinState> getSpecificHistory(Player player) {
-      // TODO: Votre code ici
-      return null;
+      return history.get(player);
     }
 
 }

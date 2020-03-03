@@ -52,4 +52,14 @@ public class Statistics {
     this.totalNumberMoves = totalNumberMoves;
   }
 
+  @Override
+  public String toString()
+  {
+    return "Statistics{" +
+            "averageToWin=" + averageToWin +
+            ", fewerMovesToWin=" + fewerMovesToWin +
+            ", mostMovesToWin=" + mostMovesToWin +
+            ", totalNumberMoves=" + totalNumberMoves +
+            '}';
+  }
 }
